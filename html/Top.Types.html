@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>Top.Types</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Top.Types</h1>
+
+<div class="code">
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Arith.Compare_dec.html#"><span class="id" title="library">Compare_dec</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Arith.EqNat.html#"><span class="id" title="library">EqNat</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.micromega.Lia.html#"><span class="id" title="library">Lia</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Lists.List.html#"><span class="id" title="library">List</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.ZArith.Zdiv.html#"><span class="id" title="library">Zdiv</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab3"></a><h1 class="section">Syntax of C types</h1>
+
+<div class="paragraph"> </div>
+
+  The formal model is intended to represent programs <i>after</i>
+  they have already been compiled to a fairly low level intermediate
+  representation in which all code and data structures have been flattened
+  and all operations are expressed in terms of atomic data types.
+
+<div class="paragraph"> </div>
+
+  Let <span class="inlinecode"><a class="idref" href="Top.Types.html#c_ident"><span class="id" title="definition">c_ident</span></a></span> range over C identifiers, e.g., variable and struct names.
+  <i>Atomic types</i> <span class="inlinecode"><a class="idref" href="Top.Types.html#AType"><span class="id" title="inductive">AType</span></a></span> are integers or pointers to
+  <i>referent types</i> <span class="inlinecode"><a class="idref" href="Top.Types.html#RType"><span class="id" title="inductive">RType</span></a></span>, which include anonymous and named
+  <i>structure types</i> <span class="inlinecode"><a class="idref" href="Top.Types.html#Struct"><span class="id" title="inductive">Struct</span></a></span>, <i>void</i> and <i>function</i>
+  in addition to atomic types. We define an anonymous structure type <span class="inlinecode"><a class="idref" href="Top.Types.html#Struct"><span class="id" title="inductive">Struct</span></a></span>
+  as a list of identifiers with atomic types. We assume that we have a partial
+  map <span class="inlinecode"><a class="idref" href="Top.Types.html#typeTable"><span class="id" title="axiom">typeTable</span></a></span> from names to anonymous structure types that represents
+  <i>typedef</i> in the source code. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="c_ident" class="idref" href="#c_ident"><span class="id" title="definition">c_ident</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a id="AType" class="idref" href="#AType"><span class="id" title="inductive">AType</span></a> : <span class="id" title="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;| <a id="A_Int" class="idref" href="#A_Int"><span class="id" title="constructor">A_Int</span></a>: <a class="idref" href="Top.Types.html#AType:1"><span class="id" title="inductive">AType</span></a><br/>
+&nbsp;&nbsp;| <a id="A_Pointer" class="idref" href="#A_Pointer"><span class="id" title="constructor">A_Pointer</span></a>: <a class="idref" href="Top.Types.html#RType:3"><span class="id" title="inductive">RType</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Top.Types.html#AType:1"><span class="id" title="inductive">AType</span></a><br/>
+<span class="id" title="keyword">with</span> <a id="Struct" class="idref" href="#Struct"><span class="id" title="inductive">Struct</span></a> : <span class="id" title="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;| <a id="S_Nil" class="idref" href="#S_Nil"><span class="id" title="constructor">S_Nil</span></a> : <a class="idref" href="Top.Types.html#Struct:2"><span class="id" title="inductive">Struct</span></a><br/>
+&nbsp;&nbsp;| <a id="S_Cons" class="idref" href="#S_Cons"><span class="id" title="constructor">S_Cons</span></a> : <a class="idref" href="Top.Types.html#c_ident"><span class="id" title="definition">c_ident</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Top.Types.html#AType:1"><span class="id" title="inductive">AType</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Top.Types.html#Struct:2"><span class="id" title="inductive">Struct</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Top.Types.html#Struct:2"><span class="id" title="inductive">Struct</span></a><br/>
+<span class="id" title="keyword">with</span> <a id="RType" class="idref" href="#RType"><span class="id" title="inductive">RType</span></a> : <span class="id" title="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;| <a id="R_AType" class="idref" href="#R_AType"><span class="id" title="constructor">R_AType</span></a> : <a class="idref" href="Top.Types.html#AType:1"><span class="id" title="inductive">AType</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Top.Types.html#RType:3"><span class="id" title="inductive">RType</span></a><br/>
+&nbsp;&nbsp;| <a id="R_Struct" class="idref" href="#R_Struct"><span class="id" title="constructor">R_Struct</span></a> : <a class="idref" href="Top.Types.html#Struct:2"><span class="id" title="inductive">Struct</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Top.Types.html#RType:3"><span class="id" title="inductive">RType</span></a><br/>
+&nbsp;&nbsp;| <a id="R_Name" class="idref" href="#R_Name"><span class="id" title="constructor">R_Name</span></a> : <a class="idref" href="Top.Types.html#c_ident"><span class="id" title="definition">c_ident</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Top.Types.html#RType:3"><span class="id" title="inductive">RType</span></a><br/>
+&nbsp;&nbsp;| <a id="R_Void" class="idref" href="#R_Void"><span class="id" title="constructor">R_Void</span></a> : <a class="idref" href="Top.Types.html#RType:3"><span class="id" title="inductive">RType</span></a><br/>
+&nbsp;&nbsp;| <a id="R_Func" class="idref" href="#R_Func"><span class="id" title="constructor">R_Func</span></a> : <a class="idref" href="Top.Types.html#RType:3"><span class="id" title="inductive">RType</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <a id="typeTable" class="idref" href="#typeTable"><span class="id" title="axiom">typeTable</span></a> : <a class="idref" href="Top.Types.html#c_ident"><span class="id" title="definition">c_ident</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="Top.Types.html#Struct"><span class="id" title="inductive">Struct</span></a>.<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab4"></a><h1 class="section">Primitives</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="isPtr" class="idref" href="#isPtr"><span class="id" title="definition">isPtr</span></a> (<a id="a:19" class="idref" href="#a:19"><span class="id" title="binder">a</span></a> : <a class="idref" href="Top.Types.html#AType"><span class="id" title="inductive">AType</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Top.Types.html#a:19"><span class="id" title="variable">a</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="Top.Types.html#A_Pointer"><span class="id" title="constructor">A_Pointer</span></a> <span class="id" title="var">_</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a><br/>
+&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+  Atomic types are always of size one, which is the minimial granularity in
+  our memory system. The size of an anonymous structure type is the number of
+  its fields. However, the size of a referent type is a partial function, which
+  fails if <span class="inlinecode"><a class="idref" href="Top.Types.html#typeTable"><span class="id" title="axiom">typeTable</span></a></span> doesn't know the name of a named structure. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="sizeOfAType" class="idref" href="#sizeOfAType"><span class="id" title="definition">sizeOfAType</span></a> (<a id="a:21" class="idref" href="#a:21"><span class="id" title="binder">a</span></a> : <a class="idref" href="Top.Types.html#AType"><span class="id" title="inductive">AType</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Top.Types.html#a:21"><span class="id" title="variable">a</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="Top.Types.html#A_Int"><span class="id" title="constructor">A_Int</span></a> ⇒ 1<br/>
+&nbsp;&nbsp;| <a class="idref" href="Top.Types.html#A_Pointer"><span class="id" title="constructor">A_Pointer</span></a> <span class="id" title="var">_</span> ⇒ 1<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <a id="sizeOfStruct" class="idref" href="#sizeOfStruct"><span class="id" title="definition">sizeOfStruct</span></a> (<a id="s:23" class="idref" href="#s:23"><span class="id" title="binder">s</span></a> : <a class="idref" href="Top.Types.html#Struct"><span class="id" title="inductive">Struct</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Top.Types.html#s:23"><span class="id" title="variable">s</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="Top.Types.html#S_Nil"><span class="id" title="constructor">S_Nil</span></a> ⇒ 0<br/>
+&nbsp;&nbsp;| <a class="idref" href="Top.Types.html#S_Cons"><span class="id" title="constructor">S_Cons</span></a> <span class="id" title="var">_</span> <span class="id" title="var">a</span> <span class="id" title="var">s'</span> ⇒ <a class="idref" href="Top.Types.html#sizeOfStruct:24"><span class="id" title="definition">sizeOfStruct</span></a> <span class="id" title="var">s'</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="Top.Types.html#sizeOfAType"><span class="id" title="definition">sizeOfAType</span></a> <span class="id" title="var">a</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="sizeOfRType" class="idref" href="#sizeOfRType"><span class="id" title="definition">sizeOfRType</span></a> (<a id="r:26" class="idref" href="#r:26"><span class="id" title="binder">r</span></a> : <a class="idref" href="Top.Types.html#RType"><span class="id" title="inductive">RType</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Top.Types.html#r:26"><span class="id" title="variable">r</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="Top.Types.html#R_AType"><span class="id" title="constructor">R_AType</span></a> <span class="id" title="var">a</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> (<a class="idref" href="Top.Types.html#sizeOfAType"><span class="id" title="definition">sizeOfAType</span></a> <span class="id" title="var">a</span>)<br/>
+&nbsp;&nbsp;| <a class="idref" href="Top.Types.html#R_Struct"><span class="id" title="constructor">R_Struct</span></a> <span class="id" title="var">s</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> (<a class="idref" href="Top.Types.html#sizeOfStruct"><span class="id" title="definition">sizeOfStruct</span></a> <span class="id" title="var">s</span>)<br/>
+&nbsp;&nbsp;| <a class="idref" href="Top.Types.html#R_Name"><span class="id" title="constructor">R_Name</span></a> <span class="id" title="var">n</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Top.Types.html#typeTable"><span class="id" title="axiom">typeTable</span></a> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <span class="id" title="var">s</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> (<a class="idref" href="Top.Types.html#sizeOfStruct"><span class="id" title="definition">sizeOfStruct</span></a> <span class="id" title="var">s</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="Top.Types.html#R_Void"><span class="id" title="constructor">R_Void</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> 1<br/>
+&nbsp;&nbsp;| <a class="idref" href="Top.Types.html#R_Func"><span class="id" title="constructor">R_Func</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> 1<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+  Given an identifier, we can get its offset and atomic type if it is
+  a field of a structure. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <a id="getStructOffset" class="idref" href="#getStructOffset"><span class="id" title="definition">getStructOffset</span></a> (<a id="s:28" class="idref" href="#s:28"><span class="id" title="binder">s</span></a> : <a class="idref" href="Top.Types.html#Struct"><span class="id" title="inductive">Struct</span></a>) (<a id="id:29" class="idref" href="#id:29"><span class="id" title="binder">id</span></a> : <a class="idref" href="Top.Types.html#c_ident"><span class="id" title="definition">c_ident</span></a>) {<span class="id" title="keyword">struct</span> <span class="id" title="var">s</span>} : <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Top.Types.html#s:28"><span class="id" title="variable">s</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="Top.Types.html#S_Nil"><span class="id" title="constructor">S_Nil</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a><br/>
+&nbsp;&nbsp;| <a class="idref" href="Top.Types.html#S_Cons"><span class="id" title="constructor">S_Cons</span></a> <span class="id" title="var">n</span> <span class="id" title="var">a</span> <span class="id" title="var">s'</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">if</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Arith.EqNat.html#beq_nat"><span class="id" title="abbreviation">beq_nat</span></a> <span class="id" title="var">n</span> <a class="idref" href="Top.Types.html#id:29"><span class="id" title="variable">id</span></a> <span class="id" title="keyword">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">else</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Top.Types.html#getStructOffset:30"><span class="id" title="definition">getStructOffset</span></a> <span class="id" title="var">s'</span> <a class="idref" href="Top.Types.html#id:29"><span class="id" title="variable">id</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <span class="id" title="var">o</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> (<span class="id" title="var">o</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="Top.Types.html#sizeOfAType"><span class="id" title="definition">sizeOfAType</span></a> <span class="id" title="var">a</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <a id="getStructType" class="idref" href="#getStructType"><span class="id" title="definition">getStructType</span></a> (<a id="s:32" class="idref" href="#s:32"><span class="id" title="binder">s</span></a> : <a class="idref" href="Top.Types.html#Struct"><span class="id" title="inductive">Struct</span></a>) (<a id="id:33" class="idref" href="#id:33"><span class="id" title="binder">id</span></a> : <a class="idref" href="Top.Types.html#c_ident"><span class="id" title="definition">c_ident</span></a>) {<span class="id" title="keyword">struct</span> <span class="id" title="var">s</span>} : <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="Top.Types.html#AType"><span class="id" title="inductive">AType</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Top.Types.html#s:32"><span class="id" title="variable">s</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="Top.Types.html#S_Nil"><span class="id" title="constructor">S_Nil</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a><br/>
+&nbsp;&nbsp;| <a class="idref" href="Top.Types.html#S_Cons"><span class="id" title="constructor">S_Cons</span></a> <span class="id" title="var">n</span> <span class="id" title="var">a</span> <span class="id" title="var">s'</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">if</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Arith.EqNat.html#beq_nat"><span class="id" title="abbreviation">beq_nat</span></a> <span class="id" title="var">n</span> <a class="idref" href="Top.Types.html#id:33"><span class="id" title="variable">id</span></a> <span class="id" title="keyword">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <span class="id" title="var">a</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">else</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Top.Types.html#getStructType:34"><span class="id" title="definition">getStructType</span></a> <span class="id" title="var">s'</span> <a class="idref" href="Top.Types.html#id:33"><span class="id" title="variable">id</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab5"></a><h1 class="section">Well-formedness</h1>
+
+<div class="paragraph"> </div>
+
+  The well-formedness |-a, |-s, and |-r for atomic types <span class="inlinecode"><a class="idref" href="Top.Types.html#wf_AType"><span class="id" title="inductive">wf_AType</span></a></span>,
+  anonymous structure types <span class="inlinecode"><a class="idref" href="Top.Types.html#wf_Struct"><span class="id" title="inductive">wf_Struct</span></a></span>, and referent types <span class="inlinecode"><a class="idref" href="Top.Types.html#wf_RType"><span class="id" title="inductive">wf_RType</span></a></span> are
+  defined mutually. Most of the cases are straightward. At case <span class="inlinecode"><a class="idref" href="Top.Types.html#wf_R_Name"><span class="id" title="constructor">wf_R_Name</span></a></span>,
+  a named structure is well-formed if the name is stored in the table
+  <span class="inlinecode"><a class="idref" href="Top.Types.html#typeTable"><span class="id" title="axiom">typeTable</span></a></span> with a well-formed anonymous structure type. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a id="wf_AType" class="idref" href="#wf_AType"><span class="id" title="inductive">wf_AType</span></a> : <a class="idref" href="Top.Types.html#AType"><span class="id" title="inductive">AType</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;| <a id="wf_A_Int" class="idref" href="#wf_A_Int"><span class="id" title="constructor">wf_A_Int</span></a>: <a class="idref" href="Top.Types.html#wf_AType:36"><span class="id" title="inductive">wf_AType</span></a> <a class="idref" href="Top.Types.html#A_Int"><span class="id" title="constructor">A_Int</span></a><br/>
+&nbsp;&nbsp;| <a id="wf_A_Pointer" class="idref" href="#wf_A_Pointer"><span class="id" title="constructor">wf_A_Pointer</span></a>: <span class="id" title="keyword">∀</span> <a id="r:42" class="idref" href="#r:42"><span class="id" title="binder">r</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Top.Types.html#wf_RType:38"><span class="id" title="inductive">wf_RType</span></a> <a class="idref" href="Top.Types.html#r:42"><span class="id" title="variable">r</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Top.Types.html#wf_AType:36"><span class="id" title="inductive">wf_AType</span></a> (<a class="idref" href="Top.Types.html#A_Pointer"><span class="id" title="constructor">A_Pointer</span></a> <a class="idref" href="Top.Types.html#r:42"><span class="id" title="variable">r</span></a>)<br/>
+<span class="id" title="keyword">with</span> <a id="wf_Struct" class="idref" href="#wf_Struct"><span class="id" title="inductive">wf_Struct</span></a> : <a class="idref" href="Top.Types.html#Struct"><span class="id" title="inductive">Struct</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;| <a id="wf_S_Nil" class="idref" href="#wf_S_Nil"><span class="id" title="constructor">wf_S_Nil</span></a> : <a class="idref" href="Top.Types.html#wf_Struct:37"><span class="id" title="inductive">wf_Struct</span></a> <a class="idref" href="Top.Types.html#S_Nil"><span class="id" title="constructor">S_Nil</span></a><br/>
+&nbsp;&nbsp;| <a id="wf_S_Cons" class="idref" href="#wf_S_Cons"><span class="id" title="constructor">wf_S_Cons</span></a> : <span class="id" title="keyword">∀</span> <a id="n:43" class="idref" href="#n:43"><span class="id" title="binder">n</span></a> <a id="a:44" class="idref" href="#a:44"><span class="id" title="binder">a</span></a> <a id="s:45" class="idref" href="#s:45"><span class="id" title="binder">s</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Top.Types.html#wf_AType:36"><span class="id" title="inductive">wf_AType</span></a> <a class="idref" href="Top.Types.html#a:44"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Top.Types.html#wf_Struct:37"><span class="id" title="inductive">wf_Struct</span></a> <a class="idref" href="Top.Types.html#s:45"><span class="id" title="variable">s</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Top.Types.html#wf_Struct:37"><span class="id" title="inductive">wf_Struct</span></a> (<a class="idref" href="Top.Types.html#S_Cons"><span class="id" title="constructor">S_Cons</span></a> <a class="idref" href="Top.Types.html#n:43"><span class="id" title="variable">n</span></a> <a class="idref" href="Top.Types.html#a:44"><span class="id" title="variable">a</span></a> <a class="idref" href="Top.Types.html#s:45"><span class="id" title="variable">s</span></a>)<br/>
+<span class="id" title="keyword">with</span> <a id="wf_RType" class="idref" href="#wf_RType"><span class="id" title="inductive">wf_RType</span></a> : <a class="idref" href="Top.Types.html#RType"><span class="id" title="inductive">RType</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;| <a id="wf_R_AType" class="idref" href="#wf_R_AType"><span class="id" title="constructor">wf_R_AType</span></a> : <span class="id" title="keyword">∀</span> <a id="a:46" class="idref" href="#a:46"><span class="id" title="binder">a</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Top.Types.html#wf_AType:36"><span class="id" title="inductive">wf_AType</span></a> <a class="idref" href="Top.Types.html#a:46"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Top.Types.html#wf_RType:38"><span class="id" title="inductive">wf_RType</span></a> (<a class="idref" href="Top.Types.html#R_AType"><span class="id" title="constructor">R_AType</span></a> <a class="idref" href="Top.Types.html#a:46"><span class="id" title="variable">a</span></a>)<br/>
+&nbsp;&nbsp;| <a id="wf_R_Struct" class="idref" href="#wf_R_Struct"><span class="id" title="constructor">wf_R_Struct</span></a>: <span class="id" title="keyword">∀</span> <a id="s:47" class="idref" href="#s:47"><span class="id" title="binder">s</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Top.Types.html#wf_Struct:37"><span class="id" title="inductive">wf_Struct</span></a> <a class="idref" href="Top.Types.html#s:47"><span class="id" title="variable">s</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Top.Types.html#wf_RType:38"><span class="id" title="inductive">wf_RType</span></a> (<a class="idref" href="Top.Types.html#R_Struct"><span class="id" title="constructor">R_Struct</span></a> <a class="idref" href="Top.Types.html#s:47"><span class="id" title="variable">s</span></a>)<br/>
+&nbsp;&nbsp;| <a id="wf_R_Name" class="idref" href="#wf_R_Name"><span class="id" title="constructor">wf_R_Name</span></a>: <span class="id" title="keyword">∀</span> <a id="n:48" class="idref" href="#n:48"><span class="id" title="binder">n</span></a> <a id="s:49" class="idref" href="#s:49"><span class="id" title="binder">s</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Top.Types.html#typeTable"><span class="id" title="axiom">typeTable</span></a> <a class="idref" href="Top.Types.html#n:48"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="Top.Types.html#s:49"><span class="id" title="variable">s</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Top.Types.html#wf_Struct:37"><span class="id" title="inductive">wf_Struct</span></a> <a class="idref" href="Top.Types.html#s:49"><span class="id" title="variable">s</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Top.Types.html#wf_RType:38"><span class="id" title="inductive">wf_RType</span></a> (<a class="idref" href="Top.Types.html#R_Name"><span class="id" title="constructor">R_Name</span></a> <a class="idref" href="Top.Types.html#n:48"><span class="id" title="variable">n</span></a>)<br/>
+&nbsp;&nbsp;| <a id="wf_R_Void" class="idref" href="#wf_R_Void"><span class="id" title="constructor">wf_R_Void</span></a>: <a class="idref" href="Top.Types.html#wf_RType:38"><span class="id" title="inductive">wf_RType</span></a> <a class="idref" href="Top.Types.html#R_Void"><span class="id" title="constructor">R_Void</span></a><br/>
+&nbsp;&nbsp;| <a id="wf_R_Func" class="idref" href="#wf_R_Func"><span class="id" title="constructor">wf_R_Func</span></a>: <a class="idref" href="Top.Types.html#wf_RType:38"><span class="id" title="inductive">wf_RType</span></a> <a class="idref" href="Top.Types.html#R_Func"><span class="id" title="constructor">R_Func</span></a>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Global Hint Constructors</span><br/>
+&nbsp;&nbsp;<a class="idref" href="Top.Types.html#AType"><span class="id" title="inductive">AType</span></a> <a class="idref" href="Top.Types.html#Struct"><span class="id" title="inductive">Struct</span></a> <a class="idref" href="Top.Types.html#RType"><span class="id" title="inductive">RType</span></a> <a class="idref" href="Top.Types.html#wf_AType"><span class="id" title="inductive">wf_AType</span></a> <a class="idref" href="Top.Types.html#wf_Struct"><span class="id" title="inductive">wf_Struct</span></a> : <span class="id" title="var">core</span>.<br/>
+<span class="id" title="keyword">Global Hint Resolve</span><br/>
+&nbsp;&nbsp;<span class="id" title="var">wf_R_AType</span> <span class="id" title="var">wf_R_Struct</span> <span class="id" title="var">wf_R_Name</span> <span class="id" title="var">wf_R_Void</span> <span class="id" title="var">wf_R_Func</span> : <span class="id" title="var">core</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

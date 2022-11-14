@@ -1,0 +1,55 @@
+================================================================================
+                          GENERAL DESCRIPTION
+================================================================================
+
+This directory contains the formalization of Movec's monitoring algorithm for
+the dynamic analysis of memory safety, which has been completely mechanized
+using the Coq proof assistant. The code is developed, and thus can be validated,
+with Coq 8.15.2 (released June 2022).
+
+The formalization includes:
+* A non-standard operational semantics for C programs. This semantics
+  tracks information about which memory addresses have been allocated
+  and the (run-time) types of values. Crucially, this semantics yields
+  an "error" state whenever a bad C program would cause a safety violation.
+  The C language considered here includes a named structure type to define
+  recursive data structures, the member operator ->, the address-of
+  operator &, malloc, free and a simple form of function call that has
+  no arguments or results, but does allow stack pointers to escape via
+  the heap.
+* A proof about the backward behavior simulation of the instrumented program.
+
+================================================================================
+                              CONTENTS
+================================================================================
+
+* FILE        : Types.v
+  DESCRIPTION : Definition of C types
+
+* FILE        : Envs.v
+  DESCRIPTION : Definition of environment, such as memory, global, heap, stack,
+                APIs (read, write, malloc, free, createFrame, destroyFrame)
+
+* FILE        : Syntax.v
+  DESCRIPTION : Definition of C syntax
+
+* FILE        : CSemantics.v
+  DESCRIPTION : Operational semantics of C
+
+* FILE        : ISemantics.v
+  DESCRIPTION : Operational semantics of instrumented C
+
+* FILE        : Axioms.v
+  DESCRIPTION : Axioms of APIs
+
+* FILE        : Tactics.v
+  DESCRIPTION : Additional proving tactics
+
+* FILE        : LibBehavior.v
+  DESCRIPTION : Supporting lemmas on the behavior of primitives
+
+* FILE        : BehavSim.v
+  DESCRIPTION : Proved if an instrumented program runs without errors,
+                the original C program has no error either
+
+================================================================================

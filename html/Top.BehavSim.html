@@ -1,0 +1,476 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>Top.BehavSim</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Top.BehavSim</h1>
+
+<div class="code">
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Arith.Compare_dec.html#"><span class="id" title="library">Compare_dec</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Arith.EqNat.html#"><span class="id" title="library">EqNat</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.micromega.Lia.html#"><span class="id" title="library">Lia</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Lists.List.html#"><span class="id" title="library">List</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Arith.Mult.html#"><span class="id" title="library">Mult</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Top.Types.html#"><span class="id" title="library">Types</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Top.Envs.html#"><span class="id" title="library">Envs</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Top.Syntax.html#"><span class="id" title="library">Syntax</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Top.CSemantics.html#"><span class="id" title="library">CSemantics</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Top.ISemantics.html#"><span class="id" title="library">ISemantics</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Top.Axioms.html#"><span class="id" title="library">Axioms</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Top.Tactics.html#"><span class="id" title="library">Tactics</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Top.LibBehavior.html#"><span class="id" title="library">LibBehavior</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Strings.String.html#"><span class="id" title="library">Coq.Strings.String</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Lists.List.html#"><span class="id" title="library">Coq.Lists.List</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab40"></a><h1 class="section">Properties of results</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a id="uROK__isnot__uError" class="idref" href="#uROK__isnot__uError"><span class="id" title="lemma">uROK__isnot__uError</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a><a class="idref" href="Top.CSemantics.html#uError"><span class="id" title="definition">uError</span></a> <a class="idref" href="Top.CSemantics.html#uROK"><span class="id" title="constructor">uROK</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.CSemantics.html#uError"><span class="id" title="definition">uError</span></a>. <span class="id" title="tactic">intro</span> <span class="id" title="var">J</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">J</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Global Hint Resolve</span> <span class="id" title="var">uROK__isnot__uError</span> : <span class="id" title="var">core</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a id="RAbort__is__Error" class="idref" href="#RAbort__is__Error"><span class="id" title="lemma">RAbort__is__Error</span></a> : <span class="id" title="keyword">∀</span> <a id="R:1" class="idref" href="#R:1"><span class="id" title="binder">R</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Top.BehavSim.html#R:1"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Top.ISemantics.html#RAbort"><span class="id" title="constructor">RAbort</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Top.ISemantics.html#Error"><span class="id" title="definition">Error</span></a> <a class="idref" href="Top.BehavSim.html#R:1"><span class="id" title="variable">R</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.ISemantics.html#Error"><span class="id" title="definition">Error</span></a>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a id="Error__inversion" class="idref" href="#Error__inversion"><span class="id" title="lemma">Error__inversion</span></a> : <span class="id" title="keyword">∀</span> <a id="R:2" class="idref" href="#R:2"><span class="id" title="binder">R</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Top.ISemantics.html#Error"><span class="id" title="definition">Error</span></a> <a class="idref" href="Top.BehavSim.html#R:2"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Top.BehavSim.html#R:2"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Top.ISemantics.html#ROK"><span class="id" title="constructor">ROK</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e25"><span class="id" title="notation">∨</span></a> <a class="idref" href="Top.BehavSim.html#R:2"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Top.ISemantics.html#RAbort"><span class="id" title="constructor">RAbort</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e25"><span class="id" title="notation">∨</span></a> <a class="idref" href="Top.BehavSim.html#R:2"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Top.ISemantics.html#RSystemError"><span class="id" title="constructor">RSystemError</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">R</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">R</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.ISemantics.html#Error"><span class="id" title="definition">Error</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H</span> | <span class="id" title="var">H</span>]. <span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.ISemantics.html#Error"><span class="id" title="definition">Error</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H</span> | <span class="id" title="var">H</span>]. <span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab41"></a><h1 class="section">Backward behavior simulation</h1>
+
+<div class="paragraph"> </div>
+
+ We proved that if an instrumented program terminates successfully,
+    the original C program will not cause any memory violation. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a id="s_lhs__implies__us_lhs" class="idref" href="#s_lhs__implies__us_lhs"><span class="id" title="lemma">s_lhs__implies__us_lhs</span></a> : <span class="id" title="keyword">∀</span> <a id="E:3" class="idref" href="#E:3"><span class="id" title="binder">E</span></a> <a id="lhs:4" class="idref" href="#lhs:4"><span class="id" title="binder">lhs</span></a> <a id="loc:5" class="idref" href="#loc:5"><span class="id" title="binder">loc</span></a> <a id="sa:6" class="idref" href="#sa:6"><span class="id" title="binder">sa</span></a> <a id="t:7" class="idref" href="#t:7"><span class="id" title="binder">t</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Top.ISemantics.html#s_lhs"><span class="id" title="inductive">s_lhs</span></a> <a class="idref" href="Top.BehavSim.html#E:3"><span class="id" title="variable">E</span></a> <a class="idref" href="Top.BehavSim.html#lhs:4"><span class="id" title="variable">lhs</span></a> (<a class="idref" href="Top.ISemantics.html#RLoc"><span class="id" title="constructor">RLoc</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="Top.BehavSim.html#loc:5"><span class="id" title="variable">loc</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="Top.BehavSim.html#sa:6"><span class="id" title="variable">sa</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>) <a class="idref" href="Top.BehavSim.html#t:7"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Top.CSemantics.html#us_lhs"><span class="id" title="inductive">us_lhs</span></a> (<a class="idref" href="Top.Envs.html#Env2uEnv"><span class="id" title="definition">Env2uEnv</span></a> <a class="idref" href="Top.BehavSim.html#E:3"><span class="id" title="variable">E</span></a>) <a class="idref" href="Top.BehavSim.html#lhs:4"><span class="id" title="variable">lhs</span></a> (<a class="idref" href="Top.CSemantics.html#uRLoc"><span class="id" title="constructor">uRLoc</span></a> <a class="idref" href="Top.BehavSim.html#loc:5"><span class="id" title="variable">loc</span></a>) <a class="idref" href="Top.BehavSim.html#t:7"><span class="id" title="variable">t</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">E</span> <span class="id" title="var">lhs</span> <span class="id" title="var">loc</span> <span class="id" title="var">sa</span> <span class="id" title="var">t</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">remember</span> (<a class="idref" href="Top.ISemantics.html#RLoc"><span class="id" title="constructor">RLoc</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><span class="id" title="var">loc</span><a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <span class="id" title="var">sa</span><a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>) <span class="id" title="keyword">as</span> <span class="id" title="var">RLS</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">loc</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">sa</span>.<br/>
+&nbsp;&nbsp;(<span class="id" title="var">s_lhs_cases</span> (<span class="id" title="tactic">induction</span> <span class="id" title="var">H</span>) <span class="id" title="var">Case</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_GVar"><span class="id" title="constructor">S_GVar</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRLS</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">clear</span> <span class="id" title="var">HeqRLS</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.CSemantics.html#uS_GVar"><span class="id" title="constructor">uS_GVar</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.Envs.html#StackVar2frame"><span class="id" title="definition">StackVar2frame</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.Envs.html#Frame2frame"><span class="id" title="definition">Frame2frame</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.Envs.html#uStackVar2frame"><span class="id" title="definition">uStackVar2frame</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.Envs.html#Env2uEnv"><span class="id" title="definition">Env2uEnv</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.Envs.html#uFrame2frame"><span class="id" title="definition">uFrame2frame</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.Envs.html#Frames2uFrames"><span class="id" title="definition">Frames2uFrames</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.Envs.html#Frame2uFrame"><span class="id" title="definition">Frame2uFrame</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<a class="idref" href="Top.Envs.html#frames"><span class="id" title="projection">frames</span></a> (<a class="idref" href="Top.Envs.html#stackvar"><span class="id" title="projection">stackvar</span></a> <span class="id" title="var">E</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_SVar"><span class="id" title="constructor">S_SVar</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRLS</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">clear</span> <span class="id" title="var">HeqRLS</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.CSemantics.html#uS_SVar"><span class="id" title="constructor">uS_SVar</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.Envs.html#lookUpStackVar"><span class="id" title="definition">lookUpStackVar</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">E</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">M</span> <span class="id" title="var">G</span> <span class="id" title="var">AMB</span> [<span class="id" title="var">frs</span> <span class="id" title="var">top</span> <span class="id" title="var">lsa</span>] <span class="id" title="var">PT</span> <span class="id" title="var">ST</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.Envs.html#lookUpuStackVar"><span class="id" title="definition">lookUpuStackVar</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.Envs.html#Env2uEnv"><span class="id" title="definition">Env2uEnv</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.Envs.html#StackVar2uStackVar"><span class="id" title="definition">StackVar2uStackVar</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.Envs.html#Frames2uFrames"><span class="id" title="definition">Frames2uFrames</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.Envs.html#Frame2uFrame"><span class="id" title="definition">Frame2uFrame</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">frs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×. <span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.Envs.html#lookUpFrame"><span class="id" title="definition">lookUpFrame</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<a class="idref" href="Top.Envs.html#fdata"><span class="id" title="projection">fdata</span></a> <span class="id" title="var">f</span> <span class="id" title="var">vid</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">p</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">fl</span> <span class="id" title="var">fa</span>]. <span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Deref"><span class="id" title="constructor">S_Deref</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRLS</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">clear</span> <span class="id" title="var">HeqRLS</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="Top.CSemantics.html#uS_Deref"><span class="id" title="constructor">uS_Deref</span></a>. <span class="id" title="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.LibBehavior.html#accessMemPmd__accessMem_Some"><span class="id" title="lemma">accessMemPmd__accessMem_Some</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Deref_ErrorProp"><span class="id" title="constructor">S_Deref_ErrorProp</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.ISemantics.html#Error"><span class="id" title="definition">Error</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H0</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H0</span> | <span class="id" title="var">H0</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Deref_Abort"><span class="id" title="constructor">S_Deref_Abort</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRLS</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Deref_Abort_None"><span class="id" title="constructor">S_Deref_Abort_None</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRLS</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_StructPos"><span class="id" title="constructor">S_StructPos</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRLS</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">clear</span> <span class="id" title="var">HeqRLS</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="Top.CSemantics.html#uS_StructPos"><span class="id" title="constructor">uS_StructPos</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.LibBehavior.html#accessMemPmd__accessMem_Some"><span class="id" title="lemma">accessMemPmd__accessMem_Some</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_StructPos_ErrorProp"><span class="id" title="constructor">S_StructPos_ErrorProp</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.ISemantics.html#Error"><span class="id" title="definition">Error</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H0</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H0</span> | <span class="id" title="var">H0</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_StructPos_Abort"><span class="id" title="constructor">S_StructPos_Abort</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRLS</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_StructPos_Abort_None"><span class="id" title="constructor">S_StructPos_Abort_None</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRLS</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_NamePos"><span class="id" title="constructor">S_NamePos</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRLS</span>. <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="Top.CSemantics.html#uS_NamePos"><span class="id" title="constructor">uS_NamePos</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.LibBehavior.html#accessMemPmd__accessMem_Some"><span class="id" title="lemma">accessMemPmd__accessMem_Some</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H1</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_NamePos_ErrorProp"><span class="id" title="constructor">S_NamePos_ErrorProp</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.ISemantics.html#Error"><span class="id" title="definition">Error</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H0</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H0</span> | <span class="id" title="var">H0</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_NamePos_Abort"><span class="id" title="constructor">S_NamePos_Abort</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRLS</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_NamePos_Abort_None"><span class="id" title="constructor">S_NamePos_Abort_None</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRLS</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a id="s_lhs__cannot__RSystemError" class="idref" href="#s_lhs__cannot__RSystemError"><span class="id" title="lemma">s_lhs__cannot__RSystemError</span></a> : <span class="id" title="keyword">∀</span> <a id="E:8" class="idref" href="#E:8"><span class="id" title="binder">E</span></a> <a id="lhs:9" class="idref" href="#lhs:9"><span class="id" title="binder">lhs</span></a> <a id="R:10" class="idref" href="#R:10"><span class="id" title="binder">R</span></a> <a id="t:11" class="idref" href="#t:11"><span class="id" title="binder">t</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Top.ISemantics.html#s_lhs"><span class="id" title="inductive">s_lhs</span></a> <a class="idref" href="Top.BehavSim.html#E:8"><span class="id" title="variable">E</span></a> <a class="idref" href="Top.BehavSim.html#lhs:9"><span class="id" title="variable">lhs</span></a> <a class="idref" href="Top.BehavSim.html#R:10"><span class="id" title="variable">R</span></a> <a class="idref" href="Top.BehavSim.html#t:11"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Top.BehavSim.html#R:10"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> <a class="idref" href="Top.ISemantics.html#RSystemError"><span class="id" title="constructor">RSystemError</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">E</span> <span class="id" title="var">lhs</span> <span class="id" title="var">R</span> <span class="id" title="var">t</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;(<span class="id" title="var">s_lhs_cases</span> (<span class="id" title="tactic">induction</span> <span class="id" title="var">H</span>) <span class="id" title="var">Case</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">J</span>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">solve</span> [<span class="id" title="tactic">inversion</span> <span class="id" title="var">J</span> | <span class="id" title="tactic">auto</span>].<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a id="s_rhs__implies__us_rhs" class="idref" href="#s_rhs__implies__us_rhs"><span class="id" title="lemma">s_rhs__implies__us_rhs</span></a> : <span class="id" title="keyword">∀</span> <a id="E:12" class="idref" href="#E:12"><span class="id" title="binder">E</span></a> <a id="rhs:13" class="idref" href="#rhs:13"><span class="id" title="binder">rhs</span></a> <a id="v:14" class="idref" href="#v:14"><span class="id" title="binder">v</span></a> <a id="p:15" class="idref" href="#p:15"><span class="id" title="binder">p</span></a> <a id="t:16" class="idref" href="#t:16"><span class="id" title="binder">t</span></a> <a id="E':17" class="idref" href="#E':17"><span class="id" title="binder">E'</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Top.ISemantics.html#s_rhs"><span class="id" title="inductive">s_rhs</span></a> <a class="idref" href="Top.BehavSim.html#E:12"><span class="id" title="variable">E</span></a> <a class="idref" href="Top.BehavSim.html#rhs:13"><span class="id" title="variable">rhs</span></a> (<a class="idref" href="Top.ISemantics.html#RVal"><span class="id" title="constructor">RVal</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="Top.BehavSim.html#v:14"><span class="id" title="variable">v</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="Top.BehavSim.html#p:15"><span class="id" title="variable">p</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>) <a class="idref" href="Top.BehavSim.html#t:16"><span class="id" title="variable">t</span></a> <a class="idref" href="Top.BehavSim.html#E':17"><span class="id" title="variable">E'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Top.CSemantics.html#us_rhs"><span class="id" title="inductive">us_rhs</span></a> (<a class="idref" href="Top.Envs.html#Env2uEnv"><span class="id" title="definition">Env2uEnv</span></a> <a class="idref" href="Top.BehavSim.html#E:12"><span class="id" title="variable">E</span></a>) <a class="idref" href="Top.BehavSim.html#rhs:13"><span class="id" title="variable">rhs</span></a> (<a class="idref" href="Top.CSemantics.html#uRVal"><span class="id" title="constructor">uRVal</span></a> <a class="idref" href="Top.BehavSim.html#v:14"><span class="id" title="variable">v</span></a>) <a class="idref" href="Top.BehavSim.html#t:16"><span class="id" title="variable">t</span></a> (<a class="idref" href="Top.Envs.html#Env2uEnv"><span class="id" title="definition">Env2uEnv</span></a> <a class="idref" href="Top.BehavSim.html#E':17"><span class="id" title="variable">E'</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">E</span> <span class="id" title="var">rhs</span> <span class="id" title="var">v</span> <span class="id" title="var">p</span> <span class="id" title="var">t</span> <span class="id" title="var">E'</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">remember</span> (<a class="idref" href="Top.ISemantics.html#RVal"><span class="id" title="constructor">RVal</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><span class="id" title="var">v</span><a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <span class="id" title="var">p</span><a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>) <span class="id" title="keyword">as</span> <span class="id" title="var">RVP</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">v</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">p</span>.<br/>
+&nbsp;&nbsp;(<span class="id" title="var">s_rhs_cases</span> (<span class="id" title="tactic">induction</span> <span class="id" title="var">H</span>) <span class="id" title="var">Case</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Const"><span class="id" title="constructor">S_Const</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRVP</span>. <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Size"><span class="id" title="constructor">S_Size</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRVP</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">clear</span> <span class="id" title="var">HeqRVP</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.CSemantics.html#uS_Size"><span class="id" title="constructor">uS_Size</span></a>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Fun"><span class="id" title="constructor">S_Fun</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRVP</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">clear</span> <span class="id" title="var">HeqRVP</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.CSemantics.html#uS_Fun"><span class="id" title="constructor">uS_Fun</span></a> <span class="id" title="keyword">with</span> (<span class="id" title="var">c</span>:=<span class="id" title="var">c</span>)(<span class="id" title="var">fr</span>:=<span class="id" title="var">fr</span>). <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Lhs"><span class="id" title="constructor">S_Lhs</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRVP</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">clear</span> <span class="id" title="var">HeqRVP</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.CSemantics.html#uS_Lhs"><span class="id" title="constructor">uS_Lhs</span></a> <span class="id" title="keyword">with</span> (<span class="id" title="var">loc</span>:=<span class="id" title="var">loc</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.BehavSim.html#s_lhs__implies__us_lhs"><span class="id" title="lemma">s_lhs__implies__us_lhs</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.LibBehavior.html#accessMemPmd__accessMem_Some"><span class="id" title="lemma">accessMemPmd__accessMem_Some</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Lhs_None"><span class="id" title="constructor">S_Lhs_None</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRVP</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">clear</span> <span class="id" title="var">HeqRVP</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.CSemantics.html#uS_Lhs"><span class="id" title="constructor">uS_Lhs</span></a> <span class="id" title="keyword">with</span> (<span class="id" title="var">loc</span>:=<span class="id" title="var">loc</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.BehavSim.html#s_lhs__implies__us_lhs"><span class="id" title="lemma">s_lhs__implies__us_lhs</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.LibBehavior.html#accessMemPmd__accessMem_Some"><span class="id" title="lemma">accessMemPmd__accessMem_Some</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Lhs_ErrorProp"><span class="id" title="constructor">S_Lhs_ErrorProp</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H0</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H0</span> | <span class="id" title="var">H0</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRVP</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRVP</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Ref"><span class="id" title="constructor">S_Ref</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRVP</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">clear</span> <span class="id" title="var">HeqRVP</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.CSemantics.html#uS_Ref"><span class="id" title="constructor">uS_Ref</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.BehavSim.html#s_lhs__implies__us_lhs"><span class="id" title="lemma">s_lhs__implies__us_lhs</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Ref_ErrorProp"><span class="id" title="constructor">S_Ref_ErrorProp</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H0</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H0</span> | <span class="id" title="var">H0</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRVP</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRVP</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Cast"><span class="id" title="constructor">S_Cast</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">d</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">v1</span> <span class="id" title="var">p1</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRVP</span>. <span class="id" title="tactic">clear</span> <span class="id" title="var">HeqRVP</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.Envs.html#dataCast"><span class="id" title="definition">dataCast</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">v1</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="var">v</span>) <span class="id" title="keyword">as</span> <span class="id" title="var">EQ</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">a'</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">a</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">p1</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">p0</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">H2</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">p1</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">p0</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">H2</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">p1</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">p0</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">a</span>. <span class="id" title="tactic">destruct</span> (<a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Arith.Compare_dec.html#le_lt_dec"><span class="id" title="definition">le_lt_dec</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H2</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<a class="idref" href="Top.Types.html#sizeOfRType"><span class="id" title="definition">sizeOfRType</span></a> <span class="id" title="var">r</span>). <span class="id" title="tactic">inversion</span> <span class="id" title="var">H2</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H2</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H2</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.CSemantics.html#uS_Cast"><span class="id" title="constructor">uS_Cast</span></a> <span class="id" title="keyword">with</span> (<span class="id" title="var">a</span>:=<span class="id" title="var">a</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Cast_ErrorProp"><span class="id" title="constructor">S_Cast_ErrorProp</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H0</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H0</span> | <span class="id" title="var">H0</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Add_Int_Int"><span class="id" title="constructor">S_Add_Int_Int</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRVP</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">clear</span> <span class="id" title="var">HeqRVP</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.CSemantics.html#uS_Add_Int_Int"><span class="id" title="constructor">uS_Add_Int_Int</span></a> <span class="id" title="keyword">with</span> (<span class="id" title="var">E'</span>:=(<a class="idref" href="Top.Envs.html#Env2uEnv"><span class="id" title="definition">Env2uEnv</span></a> <span class="id" title="var">E'</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHs_rhs1</span> <span class="id" title="keyword">with</span> (<span class="id" title="var">p</span>:=<span class="id" title="var">pmd1</span>). <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHs_rhs2</span> <span class="id" title="keyword">with</span> (<span class="id" title="var">p</span>:=<span class="id" title="var">pmd2</span>). <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Add_Int_Int_ErrorProp1"><span class="id" title="constructor">S_Add_Int_Int_ErrorProp1</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H0</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H0</span> | <span class="id" title="var">H0</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Add_Int_Int_ErrorProp2"><span class="id" title="constructor">S_Add_Int_Int_ErrorProp2</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H1</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H1</span> | <span class="id" title="var">H1</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H1</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Add_Ptr_Int"><span class="id" title="constructor">S_Add_Ptr_Int</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRVP</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">clear</span> <span class="id" title="var">HeqRVP</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.CSemantics.html#uS_Add_Ptr_Int"><span class="id" title="constructor">uS_Add_Ptr_Int</span></a> <span class="id" title="keyword">with</span> (<span class="id" title="var">E'</span>:=(<a class="idref" href="Top.Envs.html#Env2uEnv"><span class="id" title="definition">Env2uEnv</span></a> <span class="id" title="var">E'</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHs_rhs1</span> <span class="id" title="keyword">with</span> (<span class="id" title="var">p</span>:=<span class="id" title="var">p</span>). <span class="id" title="tactic">auto</span>. </div>
+
+<div class="doc">
+seems with p0:=p 
+</div>
+<div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHs_rhs2</span> <span class="id" title="keyword">with</span> (<span class="id" title="var">p</span>:=<span class="id" title="var">pmd2</span>). <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Add_Ptr_Int_ErrorProp1"><span class="id" title="constructor">S_Add_Ptr_Int_ErrorProp1</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H0</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H0</span> | <span class="id" title="var">H0</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Add_Ptr_Int_ErrorProp2"><span class="id" title="constructor">S_Add_Ptr_Int_ErrorProp2</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H1</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H1</span> | <span class="id" title="var">H1</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H1</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Alloc"><span class="id" title="constructor">S_Alloc</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRVP</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">clear</span> <span class="id" title="var">HeqRVP</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.CSemantics.html#uS_Alloc"><span class="id" title="constructor">uS_Alloc</span></a> <span class="id" title="keyword">with</span> (<span class="id" title="var">E'</span>:=(<a class="idref" href="Top.Envs.html#Env2uEnv"><span class="id" title="definition">Env2uEnv</span></a> <span class="id" title="var">E'</span>))(<span class="id" title="var">n</span>:=<span class="id" title="var">n</span>)(<span class="id" title="var">size</span>:=<span class="id" title="var">size</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHs_rhs</span> <span class="id" title="keyword">with</span> (<span class="id" title="var">p</span>:=<span class="id" title="var">pmd</span>). <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.LibBehavior.html#malloc__umalloc_Some"><span class="id" title="lemma">malloc__umalloc_Some</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H3</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Alloc_ErrorProp"><span class="id" title="constructor">S_Alloc_ErrorProp</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H0</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H0</span> | <span class="id" title="var">H0</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Alloc_OutofMem"><span class="id" title="constructor">S_Alloc_OutofMem</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqRVP</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a id="s_cmd__implies__us_cmd" class="idref" href="#s_cmd__implies__us_cmd"><span class="id" title="lemma">s_cmd__implies__us_cmd</span></a> : <span class="id" title="keyword">∀</span> <a id="E:18" class="idref" href="#E:18"><span class="id" title="binder">E</span></a> <a id="cmd:19" class="idref" href="#cmd:19"><span class="id" title="binder">cmd</span></a> <a id="E':20" class="idref" href="#E':20"><span class="id" title="binder">E'</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Top.ISemantics.html#s_cmd"><span class="id" title="inductive">s_cmd</span></a> <a class="idref" href="Top.BehavSim.html#E:18"><span class="id" title="variable">E</span></a> <a class="idref" href="Top.BehavSim.html#cmd:19"><span class="id" title="variable">cmd</span></a> <a class="idref" href="Top.ISemantics.html#ROK"><span class="id" title="constructor">ROK</span></a> <a class="idref" href="Top.BehavSim.html#E':20"><span class="id" title="variable">E'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Top.CSemantics.html#us_cmd"><span class="id" title="inductive">us_cmd</span></a> (<a class="idref" href="Top.Envs.html#Env2uEnv"><span class="id" title="definition">Env2uEnv</span></a> <a class="idref" href="Top.BehavSim.html#E:18"><span class="id" title="variable">E</span></a>) <a class="idref" href="Top.BehavSim.html#cmd:19"><span class="id" title="variable">cmd</span></a> <a class="idref" href="Top.CSemantics.html#uROK"><span class="id" title="constructor">uROK</span></a> (<a class="idref" href="Top.Envs.html#Env2uEnv"><span class="id" title="definition">Env2uEnv</span></a> <a class="idref" href="Top.BehavSim.html#E':20"><span class="id" title="variable">E'</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">E</span> <span class="id" title="var">cmd</span> <span class="id" title="var">E'</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">remember</span> <a class="idref" href="Top.ISemantics.html#ROK"><span class="id" title="constructor">ROK</span></a> <span class="id" title="keyword">as</span> <span class="id" title="var">R</span>.<br/>
+&nbsp;&nbsp;(<span class="id" title="var">s_cmd_cases</span> (<span class="id" title="tactic">induction</span> <span class="id" title="var">H</span>) <span class="id" title="var">Case</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Skip"><span class="id" title="constructor">S_Skip</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Seq"><span class="id" title="constructor">S_Seq</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.CSemantics.html#uS_Seq"><span class="id" title="constructor">uS_Seq</span></a> <span class="id" title="keyword">with</span> (<span class="id" title="var">E'</span>:=(<a class="idref" href="Top.Envs.html#Env2uEnv"><span class="id" title="definition">Env2uEnv</span></a> <span class="id" title="var">E'</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Seq_ErrorProp1"><span class="id" title="constructor">S_Seq_ErrorProp1</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H0</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H0</span> | <span class="id" title="var">H0</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Seq_ErrorProp2"><span class="id" title="constructor">S_Seq_ErrorProp2</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H1</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H1</span> | <span class="id" title="var">H1</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H1</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Assign_Ptr"><span class="id" title="constructor">S_Assign_Ptr</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">d</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">v</span> <span class="id" title="var">p</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.Envs.html#Env2uEnv"><span class="id" title="definition">Env2uEnv</span></a>. <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.CSemantics.html#uS_Assign"><span class="id" title="constructor">uS_Assign</span></a> <span class="id" title="keyword">with</span> (<span class="id" title="var">loc</span>:=<span class="id" title="var">loc</span>)(<span class="id" title="var">al</span>:=<span class="id" title="var">al</span>)(<span class="id" title="var">val</span>:=<span class="id" title="var">v</span>)(<span class="id" title="var">ar</span>:=<span class="id" title="var">ar</span>)(<span class="id" title="var">E'</span>:=<a class="idref" href="Top.Envs.html#Env2uEnv"><span class="id" title="definition">Env2uEnv</span></a> <span class="id" title="var">E'</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.BehavSim.html#s_lhs__implies__us_lhs"><span class="id" title="lemma">s_lhs__implies__us_lhs</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">auto</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.BehavSim.html#s_rhs__implies__us_rhs"><span class="id" title="lemma">s_rhs__implies__us_rhs</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>. <span class="id" title="tactic">auto</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.Envs.html#dataCast"><span class="id" title="definition">dataCast</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H3</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">p</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">p</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">ar</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">al</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.LibBehavior.html#storeMemPmd__storeMem_Some"><span class="id" title="lemma">storeMemPmd__storeMem_Some</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H3</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Arith.Compare_dec.html#le_lt_dec"><span class="id" title="definition">le_lt_dec</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.LibBehavior.html#storeMemPmd__storeMem_Some"><span class="id" title="lemma">storeMemPmd__storeMem_Some</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H3</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <a class="idref" href="Top.Types.html#sizeOfRType"><span class="id" title="definition">sizeOfRType</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.LibBehavior.html#storeMemPmd__storeMem_Some"><span class="id" title="lemma">storeMemPmd__storeMem_Some</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H3</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.LibBehavior.html#storeMemPmd__storeMem_Some"><span class="id" title="lemma">storeMemPmd__storeMem_Some</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H3</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.LibBehavior.html#storeMemPmd__storeMem_Some"><span class="id" title="lemma">storeMemPmd__storeMem_Some</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H3</span>. <span class="id" title="tactic">auto</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Assign_NPtr"><span class="id" title="constructor">S_Assign_NPtr</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">d</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">v</span> <span class="id" title="var">p</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.Envs.html#Env2uEnv"><span class="id" title="definition">Env2uEnv</span></a>. <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.CSemantics.html#uS_Assign"><span class="id" title="constructor">uS_Assign</span></a> <span class="id" title="keyword">with</span> (<span class="id" title="var">loc</span>:=<span class="id" title="var">loc</span>)(<span class="id" title="var">al</span>:=<span class="id" title="var">al</span>)(<span class="id" title="var">val</span>:=<span class="id" title="var">v</span>)(<span class="id" title="var">ar</span>:=<span class="id" title="var">ar</span>)(<span class="id" title="var">E'</span>:=<a class="idref" href="Top.Envs.html#Env2uEnv"><span class="id" title="definition">Env2uEnv</span></a> <span class="id" title="var">E'</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.BehavSim.html#s_lhs__implies__us_lhs"><span class="id" title="lemma">s_lhs__implies__us_lhs</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">auto</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.BehavSim.html#s_rhs__implies__us_rhs"><span class="id" title="lemma">s_rhs__implies__us_rhs</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>. <span class="id" title="tactic">auto</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Top.Envs.html#dataCast"><span class="id" title="definition">dataCast</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H3</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">p</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">p</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">ar</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">al</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H3</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Arith.Compare_dec.html#le_lt_dec"><span class="id" title="definition">le_lt_dec</span></a>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <a class="idref" href="Top.Types.html#sizeOfRType"><span class="id" title="definition">sizeOfRType</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Assign_ErrorProp1"><span class="id" title="constructor">S_Assign_ErrorProp1</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H0</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H0</span> | <span class="id" title="var">H0</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Assign_ErrorProp2"><span class="id" title="constructor">S_Assign_ErrorProp2</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H1</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H1</span> | <span class="id" title="var">H1</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H1</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Assign_Ptr_Abort"><span class="id" title="constructor">S_Assign_Ptr_Abort</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqR</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Call"><span class="id" title="constructor">S_Call</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.CSemantics.html#uS_Call"><span class="id" title="constructor">uS_Call</span></a> <span class="id" title="keyword">with</span> (<span class="id" title="var">fr</span>:=<span class="id" title="var">fr</span>)(<span class="id" title="var">c</span>:=<span class="id" title="var">c</span>)(<span class="id" title="var">E'</span>:=<a class="idref" href="Top.Envs.html#Env2uEnv"><span class="id" title="definition">Env2uEnv</span></a> <span class="id" title="var">E'</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">E''</span>:=<a class="idref" href="Top.Envs.html#Env2uEnv"><span class="id" title="definition">Env2uEnv</span></a> <span class="id" title="var">E''</span>)(<span class="id" title="var">loc</span>:=<span class="id" title="var">loc</span>)(<span class="id" title="var">a</span>:=<span class="id" title="var">a</span>)(<span class="id" title="var">E'''</span>:=<a class="idref" href="Top.Envs.html#Env2uEnv"><span class="id" title="definition">Env2uEnv</span></a> <span class="id" title="var">E'''</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.BehavSim.html#s_rhs__implies__us_rhs"><span class="id" title="lemma">s_rhs__implies__us_rhs</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.LibBehavior.html#createFrame__ucreateFrame_Some"><span class="id" title="lemma">createFrame__ucreateFrame_Some</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H2</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.LibBehavior.html#destroyFrame__udestroyFrame_Some"><span class="id" title="lemma">destroyFrame__udestroyFrame_Some</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H5</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Call_ErrorProp1"><span class="id" title="constructor">S_Call_ErrorProp1</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H0</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H0</span> | <span class="id" title="var">H0</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Call_ErrorProp2"><span class="id" title="constructor">S_Call_ErrorProp2</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H4</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H4</span> | <span class="id" title="var">H4</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H4</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H4</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Call_Error1"><span class="id" title="constructor">S_Call_Error1</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqR</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Call_Error2"><span class="id" title="constructor">S_Call_Error2</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqR</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Call_Abort"><span class="id" title="constructor">S_Call_Abort</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqR</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Free"><span class="id" title="constructor">S_Free</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.CSemantics.html#uS_Free"><span class="id" title="constructor">uS_Free</span></a> <span class="id" title="keyword">with</span> (<span class="id" title="var">r</span>:=<span class="id" title="var">r</span>)(<span class="id" title="var">loc</span>:=<span class="id" title="var">loc</span>)(<span class="id" title="var">E'</span>:=<a class="idref" href="Top.Envs.html#Env2uEnv"><span class="id" title="definition">Env2uEnv</span></a> <span class="id" title="var">E'</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.BehavSim.html#s_rhs__implies__us_rhs"><span class="id" title="lemma">s_rhs__implies__us_rhs</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Top.LibBehavior.html#free__ufree_Some"><span class="id" title="lemma">free__ufree_Some</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H1</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Free_ErrorProp"><span class="id" title="constructor">S_Free_ErrorProp</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H0</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">H0</span> | <span class="id" title="var">H0</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Free_Error"><span class="id" title="constructor">S_Free_Error</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqR</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Case</span> <a class="idref" href="Top.ISemantics.html#S_Free_Abort"><span class="id" title="constructor">S_Free_Abort</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">HeqR</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a id="s_cmd__cannot__RVal_or_RLoc" class="idref" href="#s_cmd__cannot__RVal_or_RLoc"><span class="id" title="lemma">s_cmd__cannot__RVal_or_RLoc</span></a> : <span class="id" title="keyword">∀</span> <a id="E:21" class="idref" href="#E:21"><span class="id" title="binder">E</span></a> <a id="cmd:22" class="idref" href="#cmd:22"><span class="id" title="binder">cmd</span></a> <a id="R:23" class="idref" href="#R:23"><span class="id" title="binder">R</span></a> <a id="E':24" class="idref" href="#E':24"><span class="id" title="binder">E'</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Top.ISemantics.html#s_cmd"><span class="id" title="inductive">s_cmd</span></a> <a class="idref" href="Top.BehavSim.html#E:21"><span class="id" title="variable">E</span></a> <a class="idref" href="Top.BehavSim.html#cmd:22"><span class="id" title="variable">cmd</span></a> <a class="idref" href="Top.BehavSim.html#R:23"><span class="id" title="variable">R</span></a> <a class="idref" href="Top.BehavSim.html#E':24"><span class="id" title="variable">E'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Top.BehavSim.html#R:23"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Top.ISemantics.html#ROK"><span class="id" title="constructor">ROK</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e25"><span class="id" title="notation">∨</span></a> <a class="idref" href="Top.BehavSim.html#R:23"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Top.ISemantics.html#RAbort"><span class="id" title="constructor">RAbort</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e25"><span class="id" title="notation">∨</span></a> <a class="idref" href="Top.BehavSim.html#R:23"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Top.ISemantics.html#RSystemError"><span class="id" title="constructor">RSystemError</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">E</span> <span class="id" title="var">cmd</span> <span class="id" title="var">R</span> <span class="id" title="var">E'</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;(<span class="id" title="var">s_cmd_cases</span> (<span class="id" title="tactic">induction</span> <span class="id" title="var">H</span>) <span class="id" title="var">Case</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span> <span class="id" title="keyword">using</span> <a class="idref" href="Top.BehavSim.html#Error__inversion"><span class="id" title="lemma">Error__inversion</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

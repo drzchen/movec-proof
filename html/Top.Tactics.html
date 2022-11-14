@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>Top.Tactics</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Top.Tactics</h1>
+
+<div class="code">
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Strings.String.html#"><span class="id" title="library">Coq.Strings.String</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Lists.List.html#"><span class="id" title="library">Coq.Lists.List</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab25"></a><h1 class="section">A library of additional tactics: delineating cases in proofs</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">string_scope</span>.<br/>
+<span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">list_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Tactic Notation</span> "assert_eq" <span class="id" title="var">ident</span>(<span class="id" title="var">x</span>) <span class="id" title="keyword">constr</span>(<span class="id" title="var">v</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">H</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">x</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.15.2/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="var">v</span>) <span class="id" title="keyword">as</span> <span class="id" title="var">H</span> <span class="id" title="tactic">by</span> <span class="id" title="tactic">reflexivity</span>;<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">clear</span> <span class="id" title="var">H</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Tactic Notation</span> "Case_aux" <span class="id" title="var">ident</span>(<span class="id" title="var">x</span>) <span class="id" title="keyword">constr</span>(<span class="id" title="var">name</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">first</span> [<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">x</span> := <span class="id" title="var">name</span>); <span class="id" title="tactic">move</span> <span class="id" title="var">x</span> <span class="id" title="tactic">at</span> <span class="id" title="var">top</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">assert_eq</span> <span class="id" title="var">x</span> <span class="id" title="var">name</span><br/>
+&nbsp;&nbsp;| <span class="id" title="tactic">fail</span> 1 "because we are working on a different case." ].<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">Case</span> <span class="id" title="var">name</span> := <span class="id" title="var">Case_aux</span> <span class="id" title="tactic">case</span> <span class="id" title="var">name</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">SCase</span> <span class="id" title="var">name</span> := <span class="id" title="var">Case_aux</span> <span class="id" title="var">subcase</span> <span class="id" title="var">name</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">SSCase</span> <span class="id" title="var">name</span> := <span class="id" title="var">Case_aux</span> <span class="id" title="var">subsubcase</span> <span class="id" title="var">name</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">SSSCase</span> <span class="id" title="var">name</span> := <span class="id" title="var">Case_aux</span> <span class="id" title="var">subsubsubcase</span> <span class="id" title="var">name</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">SSSSCase</span> <span class="id" title="var">name</span> := <span class="id" title="var">Case_aux</span> <span class="id" title="var">subsubsubsubcase</span> <span class="id" title="var">name</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">SSSSSCase</span> <span class="id" title="var">name</span> := <span class="id" title="var">Case_aux</span> <span class="id" title="var">subsubsubsubsubcase</span> <span class="id" title="var">name</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">SSSSSSCase</span> <span class="id" title="var">name</span> := <span class="id" title="var">Case_aux</span> <span class="id" title="var">subsubsubsubsubsubcase</span> <span class="id" title="var">name</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">SSSSSSSCase</span> <span class="id" title="var">name</span> := <span class="id" title="var">Case_aux</span> <span class="id" title="var">subsubsubsubsubsubsubcase</span> <span class="id" title="var">name</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">SSSSSSSSCase</span> <span class="id" title="var">name</span> := <span class="id" title="var">Case_aux</span> <span class="id" title="var">subsubsubsubsubsubsubsubcase</span> <span class="id" title="var">name</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

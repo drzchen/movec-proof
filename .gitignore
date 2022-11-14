@@ -1,0 +1,13 @@
+# Temp files
+*~
+
+# Coq files
+*.aux
+*.cache
+*.glob
+*.v.d
+*.vo
+*.vok
+*.vos
+Makefile.conf
+.Makefile.d
